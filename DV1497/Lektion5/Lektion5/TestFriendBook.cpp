@@ -76,16 +76,6 @@ int main()
 	}
 	getchar();
 
-	nrOf = testBook.getNrOfFriends();
-	friends = new string[nrOf];
-	testBook.getFriendsBornByYearAsString(friends, nrOf, 1920);
-	for (unsigned short i = 0; i < nrOf; i++)
-	{
-		cout << friends[i] << endl;
-	}
-	delete[] friends;
-	getchar();
-
 	testBook.saveOnFile("testBook.txt");
 	loadTest.readFromFile("testBook.txt");
 	nrOf = testBook.getNrOfFriends();
@@ -99,9 +89,33 @@ int main()
 	getchar();
 
 	testBook.clear();
-	nrOf = testBook.getNrOfFriends();
+	nrOf = loadTest.getNrOfFriends();
 	friends = new string[nrOf];
 	loadTest.getFriendsAsString(friends, nrOf);
+	for (unsigned short i = 0; i < nrOf; i++)
+	{
+		cout << friends[i] << endl;
+	}
+	delete[] friends;
+	getchar();
+
+	FriendBook copyTest(loadTest);
+	loadTest.removeFriend("1", 1910);
+	nrOf = copyTest.getNrOfFriends();
+	friends = new string[nrOf];
+	copyTest.getFriendsAsString(friends, nrOf);
+	for (unsigned short i = 0; i < nrOf; i++)
+	{
+		cout << friends[i] << endl;
+	}
+	delete[] friends;
+	getchar();
+
+	testBook = loadTest;
+	loadTest.removeFriend("3", 1930);
+	nrOf = testBook.getNrOfFriends();
+	friends = new string[nrOf];
+	testBook.getFriendsAsString(friends, nrOf);
 	for (unsigned short i = 0; i < nrOf; i++)
 	{
 		cout << friends[i] << endl;

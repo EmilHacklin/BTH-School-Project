@@ -10,19 +10,27 @@ void FriendBook::expand()
 		temp[i] = this->myFriends[i];
 	}
 
-	this->dealocate();
+	delete[] this->myFriends;
 	this->myFriends = temp;
 }
 
-void FriendBook::copy()
+void FriendBook::copy(const FriendBook & orginalObject)
 {
+	this->title = orginalObject.title;
+	this->capacity = orginalObject.capacity;
+	this->nrOfFriends = orginalObject.nrOfFriends;
+	this->myFriends = new Friend*[this->capacity];
+	for (unsigned short i = 0; i < this->nrOfFriends; i++)
+	{
+		this->myFriends[i] = new Friend(*orginalObject.myFriends[i]);
+	}
 }
 
 void FriendBook::dealocate()
 {
 	for (unsigned short i = 0; i < this->nrOfFriends; i++)
 	{
-		delete[] this->myFriends[i];
+		delete this->myFriends[i];
 	}
 	delete[] this->myFriends;
 }
@@ -38,14 +46,7 @@ FriendBook::FriendBook(string title, int capacity)
 
 FriendBook::FriendBook(const FriendBook & orginalObject)
 {
-	this->title = orginalObject.title;
-	this->capacity = orginalObject.capacity;
-	this->nrOfFriends = orginalObject.nrOfFriends;
-	this->myFriends = new Friend*[this->capacity];
-	for (unsigned short i = 0; i < this->nrOfFriends; i++)
-	{
-		this->myFriends[i] = new Friend(*orginalObject.myFriends[i]);
-	}
+	this->copy(orginalObject);
 }
 
 FriendBook::~FriendBook()
@@ -55,19 +56,8 @@ FriendBook::~FriendBook()
 
 FriendBook& FriendBook::operator=(const FriendBook & orginalObject)
 {
-	for (unsigned short i = 0; i < this->nrOfFriends; i++)
-	{
-		delete[] this->myFriends[i];
-	}
-	delete[] this->myFriends;
-	this->title = orginalObject.title;
-	this->capacity = orginalObject.capacity;
-	this->nrOfFriends = orginalObject.nrOfFriends;
-	this->myFriends = new Friend*[this->capacity];
-	for (unsigned short i = 0; i < this->nrOfFriends; i++)
-	{
-		this->myFriends[i] = new Friend(*orginalObject.myFriends[i]);
-	}
+	this->dealocate();
+	this->copy(orginalObject);
 	return *this;
 }
 
@@ -115,7 +105,7 @@ bool FriendBook::removeFriend(string name, int birthYear)
 	{
 		if (*this->myFriends[i] == shearchFriend)
 		{
-			delete[] this->myFriends[i];
+			delete this->myFriends[i];
 			this->nrOfFriends--;
 			this->myFriends[i] = this->myFriends[this->nrOfFriends];
 			return true;
@@ -160,15 +150,12 @@ void FriendBook::setTitle(string title)
 
 void FriendBook::clear()
 {
-	for (unsigned short i = 0; i < this->nrOfFriends)
-	{
-		delete[] this->myFriends[i];
-	}
-
+	this->dealocate();
+	this->myFriends = new Friend*[this->capacity];
 	this->nrOfFriends = 0;
 }
 
-void FriendBook::getFriendsAsString(string arr[], int nrOf) const
+void FriendBook::getFriendsAsString(string arr[], int nrOf) const// ???
 {
 	// fyller i arrayen arr med strängarna som erhålls från 
 	// varje vän-objekt i den interna arrayen myFriends vid anrop av toString()
@@ -217,24 +204,26 @@ void FriendBook::readFromFile(string filename)
 			// lägg till en vän på nästa lediga plats (hur??)
 	// stäng filen
 	ifstream inputFile(filename);
-	inputFile >> this->title;
-	inputFile.ignore((std::numeric_limits<streamsize>::max)(), '\n');
-	inputFile >> this->capacity;
-	inputFile.ignore((std::numeric_limits<streamsize>::max)(), '\n');
-	delete[] this->myFriends;
-	this->myFriends = new Friend[this->capacity];
-	inputFile >> this->nrOfFriends;
-	inputFile.ignore((std::numeric_limits<streamsize>::max)(), '\n');
-	for (unsigned short i = 0; i < this->nrOfFriends; i++)
+	if (inputFile.is_open())
 	{
-		string name = "";
-		int birthYear = 0;
-		inputFile >> name;
+		inputFile >> this->title;
 		inputFile.ignore((std::numeric_limits<streamsize>::max)(), '\n');
-		this->myFriends[i]->setName(name);
-		inputFile >> birthYear;
+		inputFile >> this->capacity;
 		inputFile.ignore((std::numeric_limits<streamsize>::max)(), '\n');
-		this->myFriends[i]->setBirthYear(birthYear);
+		this->dealocate();
+		this->myFriends = new Friend*[this->capacity];
+		inputFile >> this->nrOfFriends;
+		inputFile.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+		for (unsigned short i = 0; i < this->nrOfFriends; i++)
+		{
+			string name = "";
+			int birthYear = 0;
+			inputFile >> name;
+			inputFile.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+			inputFile >> birthYear;
+			inputFile.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+			this->myFriends[i] = new Friend(name, birthYear);
+		}
 	}
 	inputFile.close();
 }

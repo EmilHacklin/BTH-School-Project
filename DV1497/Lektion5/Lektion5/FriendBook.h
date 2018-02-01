@@ -13,7 +13,7 @@ private:
 	int capacity;
 	int nrOfFriends;
 	void expand();
-	void copy();
+	void copy(const FriendBook & orginalObject);
 	void dealocate();
 public:
 	FriendBook(string title = "unknown", int capacity = 3);
@@ -35,7 +35,7 @@ public:
 	// töm, tillse att antalet vänner är 0
 	void clear();
 	// fyller arrayen arr med strängar motsvarande toString() för de vänner som finns i arrayen myFriends
-	void getFriendsAsString(string arr[], int nrOf)const;
+	void getFriendsAsString(string arr[], int nrOf)const; //???
 	// skriver vännernas namn och födelseår på fil, överst på filen antalet vänner
 	void saveOnFile(string filename) const; 
 	// läser uppgifter från fil enligt ovan och lägger in i arrayen myFriends
