@@ -1,4 +1,4 @@
-#include "YatzeeLight.h"
+#include "Yatzee.h"
 #include <iostream>
 #include <cstdlib>
 

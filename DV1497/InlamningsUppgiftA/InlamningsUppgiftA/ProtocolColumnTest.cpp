@@ -1,5 +1,6 @@
 #include "ProtocolColumn.h"
 #include <iostream>
+#include<crtdbg.h>
 
 using namespace std;
 

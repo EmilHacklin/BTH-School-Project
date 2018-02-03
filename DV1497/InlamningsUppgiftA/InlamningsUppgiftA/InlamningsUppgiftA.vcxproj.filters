@@ -29,13 +29,13 @@
     <ClCompile Include="Dice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProtocolColumn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Yatzee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProtocolColumnTest.cpp">
+    <ClCompile Include="ProtocolColumn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="YatzeeTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
