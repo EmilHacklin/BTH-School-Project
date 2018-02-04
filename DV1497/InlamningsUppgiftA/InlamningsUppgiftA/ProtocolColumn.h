@@ -22,6 +22,7 @@ public:
 	int getNrOfRows() const;
 	int getTotalSum() const;
 	bool isFilled() const;
+	bool isFilled(const int value) const;
 	string toString() const;
 	~ProtocolColumn();
 };

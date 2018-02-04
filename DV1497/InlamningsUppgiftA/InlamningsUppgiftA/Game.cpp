@@ -10,43 +10,82 @@ int main()
 
 	int nrOfPlayers=0;
 
-	cout << "Hur många ska vara med och spela? ";
-	cin >> nrOfPlayers; cin.ignore();
+	cout << "How many players whant to play? ";
+	cin >> nrOfPlayers; 
+	cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
 
-	//Skapa ett Yatzee-objekt baserat på nrOfPlayers
+	Yatzee yatzee(nrOfPlayers); //Skapa ett Yatzee-objekt baserat på nrOfPlayers
 	
-	//Låt användaren mata in namnen på spelarna och lägg till spelarna till Yatzee-objektet
 	
-	//Så länge som inte alla spelare har spelat klart
-	
-		//Presentera protokollet för aktuell spelare
-		
-		//Kasta en omgång tärningar
-		
-		//Upprepa 2 gånger
+	for (int i = 0; i < nrOfPlayers; i++) //Låt användaren mata in namnen på spelarna och lägg till spelarna till Yatzee-objektet
+	{
+		string name = "";
+		cout << "Name of player number " << i+1 << ": ";
+		getline(cin, name);
+		yatzee.addPlayer(name);
+	}
 
-			//Visa tärningarnas utfall
-			
-			//Låt användaren mata in vilket tärningsvärde som ska sparas
-			
-			//Kasta alla övriga tärningar
-		
-		//Visa tärningarnas utfall
-		
-		//Låt användaren mata in vilket tärningsvärde resultatet ska sparas på
-	
-		//Så länge som tärningsvärdet redan är ifyllt	
-	
-			//Låt användaren mata in vilket tärningsvärde resultatet ska sparas på
-		
-		//Presentera protokollkolumnen för aktuell spelare	
-		
-		//Nästa spelares tur
+	do //Så länge som inte alla spelare har spelat klart
+	{
+		int value = 0;
+		cout << yatzee.protocolInfoOfCurrentPlayer() << endl; //Presentera protokollet för aktuell spelare
+		yatzee.toss(); //Kasta en omgång tärningar
+		for (int i = 0; i < 2; i++) //Upprepa 2 gånger
+		{
+			cout << "You tossed: " << yatzee.infoOfLatestToss() << endl; //Visa tärningarnas utfall
+			cout << "Which value do you want to save or 0 to toss them all: "; //Låt användaren mata in vilket tärningsvärde som ska sparas
+			cin >> value;
+			cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+			while (value < 0 || value > 6)
+			{
+				cout << "INVALID INPUT: Try again" << endl;
+				cout <<" Which value do you want to save or 0 to toss them all: ";
+				cin >> value;
+				cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+			}
+			yatzee.toss(value); //Kasta alla övriga tärningar
+		}
+		cout << "You tossed: " << yatzee.infoOfLatestToss() << endl; //Visa tärningarnas utfall
+		cout << "Which value do you want to save: "; //Låt användaren mata in vilket tärningsvärde som ska sparas
+		cin >> value;
+		cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+		while (!yatzee.addResult(value))
+		{
+			if (yatzee.isCurrentPlayerValueFull(value)) //Så länge som tärningsvärdet redan är ifyllt	
+			{
+				cout << "THAT VALUE IS FULL: Try again" << endl;
+			}
+			else
+			{
+				cout << "INVALID INPUT: Try again" << endl;
+			}
+			cout << "Which value do you want to save: "; //Låt användaren mata in vilket tärningsvärde resultatet ska sparas på
+			cin >> value; 
+			cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+		}
+		cout << yatzee.protocolInfoOfCurrentPlayer() << endl; //Presentera protokollet för aktuell spelare
+		yatzee.nextPlayersTurn(); //Nästa spelares tur
+		system("pause");
+		system("cls");//Rensa skärmen och pausa
+	} while (!yatzee.areAllPlayersDone());
 
-		//Rensa skärmen och pausa
-	
-	//Presentera protokollkolumnen och totalsumman för varje spelare
-	
+	int winnerSum = 0;
+	for (int i = 0; i < nrOfPlayers; i++)
+	{
+		cout << yatzee.protocolInfoOfCurrentPlayer() << endl; //Presentera protokollkolumnen och totalsumman för varje spelare
+		if (winnerSum < yatzee.getCurrentPlayerSum());
+		{
+			winnerSum = yatzee.getCurrentPlayerSum();
+		}
+		yatzee.nextPlayersTurn();
+	}
+
+	while (winnerSum != yatzee.getCurrentPlayerSum())
+	{
+		yatzee.nextPlayersTurn();
+	}
+	cout << "\n*** The winner is " << yatzee.nameOfCurrentPlayer() << " with " << to_string(winnerSum) << "Points";
+
 	system("pause");
 	return 0;
 }

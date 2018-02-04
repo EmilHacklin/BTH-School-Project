@@ -1,11 +1,5 @@
 #include "Dice.h"
 
-//void Dice::copyDice(const Dice & originalDice)
-//{
-//	this->value = originalDice.getCurrentValue();
-//	this->nrOfSidesOnDie = originalDice.nrOfSidesOnDie;
-//}
-
 Dice::Dice(int nrOfSidesOnDie)
 {
 	if (nrOfSidesOnDie > 0) //If number of sides is larger then 0 roll a die with that many sides
@@ -18,17 +12,6 @@ Dice::Dice(int nrOfSidesOnDie)
 	}
 	this->toss();
 }
-
-//Dice::Dice(const Dice & originalDice)
-//{
-//	this->copyDice(originalDice);
-//}
-
-//Dice & Dice::operator=(const Dice & originalDice)
-//{
-//	this->copyDice(originalDice);
-//	return *this;
-//}
 
 void Dice::toss()
 { //Roll die of that many sides

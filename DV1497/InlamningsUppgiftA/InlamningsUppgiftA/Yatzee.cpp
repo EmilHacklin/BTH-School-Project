@@ -10,7 +10,7 @@ void Yatzee::copyYatzee(const Yatzee & originalYatzee)
 		this->players[i] = new ProtocolColumn(*originalYatzee.players[i]); //Players element get a copyYatzee of players element from originalYatzee
 	}
 	this->indexCurrentPlayer = originalYatzee.getIndexCurrentPlayer();
-	if (this->nrOfDice != originalYatzee.getNrOfDice())
+	if (this->nrOfDice != originalYatzee.getNrOfDice()) //If number of dice is not the same as in the original
 	{
 		delete[] this->dice;
 		this->nrOfDice = originalYatzee.getNrOfDice();
@@ -60,6 +60,9 @@ Yatzee::Yatzee(const int capacityForPlayers, const int nrOfDice, const int nrOfS
 
 Yatzee::Yatzee(const Yatzee & originalYatzee)
 {
+	this->nrOfDice = originalYatzee.getNrOfDice();
+	this->nrOfDice = originalYatzee.getNrOfDice();
+	this->dice = new Dice[this->nrOfDice];
 	this->copyYatzee(originalYatzee); //Calling the member function copyYatzee
 }
 
@@ -83,6 +86,11 @@ void Yatzee::addPlayer(const string playerName)
 string Yatzee::protocolInfoOfCurrentPlayer() const
 {
 	return this->players[this->indexCurrentPlayer]->toString(); //Return toString() of current player
+}
+
+int Yatzee::getCurrentPlayerSum() const
+{
+	return this->players[this->indexCurrentPlayer]->getTotalSum();
 }
 
 int Yatzee::getCapacityForPlayers() const
@@ -154,6 +162,11 @@ bool Yatzee::addResult(const int diceValue)
 		}
 	}
 	return false;
+}
+
+bool Yatzee::isCurrentPlayerValueFull(int value) const
+{
+	return this->players[this->indexCurrentPlayer]->isFilled(value);
 }
 
 string Yatzee::nameOfCurrentPlayer() const

@@ -101,9 +101,15 @@ bool ProtocolColumn::isFilled() const
 	return true;
 }
 
+bool ProtocolColumn::isFilled(const int value) const
+{
+	return this->resultArray[value][1];
+}
+
 string ProtocolColumn::toString() const
 {
-	string returnString = this->playerName; //ReturnString will hold the final string
+	string returnString = "\n"; //ReturnString will hold the final string
+	returnString += this->playerName;
 	for (int i = 0; i < this->nrOfRows; i++) //For each element in the array
 	{
 		returnString += "\n";

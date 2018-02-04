@@ -20,7 +20,7 @@ private:
 	int nrOfDice;
 	int nrOfSidesOnDie;
 	void copyYatzee(const Yatzee &originalYatzee); //Copes Yatzee
-	void deallocatePlayers(); //Deallocate Yatzee
+	void deallocatePlayers(); //Deallocate players
 	void expandPlayers();
 public:
 	Yatzee(const int capacityForPlayers = DEFAULTCAPACITYFORPLAYERS, const int nrOfDice = DEFAULTNUMBEROFDICE, const int nrOfSidesOnDie = DEFAULTNUMBEROFSIDESONDIE);
@@ -28,6 +28,7 @@ public:
 	Yatzee& operator=(const Yatzee &originalYatzee);
 	void addPlayer(const string playerName);
 	string protocolInfoOfCurrentPlayer() const;
+	int getCurrentPlayerSum() const;
 	int getCapacityForPlayers() const;
 	int getNrOfPlayers() const;
 	int getIndexCurrentPlayer() const;
@@ -36,6 +37,7 @@ public:
 	void toss(const int diceValue);
 	string infoOfLatestToss() const;
 	bool addResult(const int diceValue);
+	bool isCurrentPlayerValueFull(const int value) const;
 	string nameOfCurrentPlayer() const;
 	void nextPlayersTurn();
 	bool areAllPlayersDone() const;
