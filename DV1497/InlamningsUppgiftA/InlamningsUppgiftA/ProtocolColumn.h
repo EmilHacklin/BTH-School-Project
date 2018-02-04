@@ -12,7 +12,7 @@ private:
 	int nrOfRows;
 	int* *resultArray; //Double pointer of int will be used for a int* array 
 	void copyProtocolColumn(const ProtocolColumn &originalProtocolColumn); //Copes ProtocolColumn
-	void deallocate(); //Deallocate ProtocolColumn
+	void deallocateRows(); //Deallocate ProtocolColumn
 public:
 	ProtocolColumn(const string playerName = "?", const int nrOfRows = DEFAULTNROFROWS); //? and default number of rows is the default argument for the constructor
 	ProtocolColumn(const ProtocolColumn &originalProtocolColumn);

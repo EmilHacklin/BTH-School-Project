@@ -13,7 +13,7 @@ void ProtocolColumn::copyProtocolColumn(const ProtocolColumn & originalProtocolC
 	}
 }
 
-void ProtocolColumn::deallocate()
+void ProtocolColumn::deallocateRows()
 {
 	for (int i = 0; i < this->nrOfRows; i++) //For each element in the array
 	{
@@ -50,7 +50,7 @@ ProtocolColumn::ProtocolColumn(const ProtocolColumn & originalProtocolColumn)
 
 ProtocolColumn & ProtocolColumn::operator=(const ProtocolColumn & originalProtocolColumn)
 {
-	this->deallocate(); //Calling member function deallocate
+	this->deallocateRows(); //Calling member function deallocateRows
 	this->copyProtocolColumn(originalProtocolColumn); //Calling the member function copyProtocolColumn
 	return *this; //Returns reference to  this
 }
@@ -120,5 +120,5 @@ string ProtocolColumn::toString() const
 
 ProtocolColumn::~ProtocolColumn()
 {
-	this->deallocate(); //Calling deallocate member function
+	this->deallocateRows(); //Calling deallocateRows member function
 }

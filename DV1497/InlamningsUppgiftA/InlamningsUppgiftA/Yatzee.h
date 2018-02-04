@@ -14,22 +14,24 @@ class Yatzee
 private:
 	ProtocolColumn * *players;
 	int capacityForPlayers;
-	int numberOfPlayers;
+	int nrOfPlayers;
 	int indexCurrentPlayer;
-	Dice* *dice;
-	int numberOfDice;
-	int numberOfSidesOnDie;
-	int numberOfReRolls;
+	Dice* dice;
+	int nrOfDice;
+	int nrOfSidesOnDie;
 	void copyYatzee(const Yatzee &originalYatzee); //Copes Yatzee
-	void deallocate(); //Deallocate Yatzee
+	void deallocatePlayers(); //Deallocate Yatzee
 	void expandPlayers();
 public:
-	Yatzee(const int capacityForPlayers = DEFAULTCAPACITYFORPLAYERS, const int numberOfDice = DEFAULTNUMBEROFDICE, const int numberOfSidesOnDie = DEFAULTNUMBEROFSIDESONDIE);
+	Yatzee(const int capacityForPlayers = DEFAULTCAPACITYFORPLAYERS, const int nrOfDice = DEFAULTNUMBEROFDICE, const int nrOfSidesOnDie = DEFAULTNUMBEROFSIDESONDIE);
 	Yatzee(const Yatzee &originalYatzee);
 	Yatzee& operator=(const Yatzee &originalYatzee);
 	void addPlayer(const string playerName);
 	string protocolInfoOfCurrentPlayer() const;
+	int getCapacityForPlayers() const;
 	int getNrOfPlayers() const;
+	int getIndexCurrentPlayer() const;
+	int getNrOfDice() const;
 	void toss();
 	void toss(const int diceValue);
 	string infoOfLatestToss() const;
