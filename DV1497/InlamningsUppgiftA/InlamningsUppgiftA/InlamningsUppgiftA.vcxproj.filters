@@ -35,15 +35,6 @@
     <ClCompile Include="ProtocolColumn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="YatzeeTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DiceTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProtocolColumnTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

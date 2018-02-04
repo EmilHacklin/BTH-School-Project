@@ -26,4 +26,3 @@ public:
 	string toString() const;
 	~ProtocolColumn();
 };
-

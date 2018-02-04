@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 
-const int DEFAULTNROFSIDESONDIE = 6; //Default number of sides
+extern const int DEFAULTNROFSIDESONDIE; //Default number of sides
 
 class Dice
 {
@@ -16,4 +16,3 @@ public:
 	int getNrOfSidesOnDie() const;
 	~Dice();
 };
-

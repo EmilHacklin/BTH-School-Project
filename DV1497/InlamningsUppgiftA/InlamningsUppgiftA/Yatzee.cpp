@@ -56,6 +56,10 @@ Yatzee::Yatzee(const int capacityForPlayers, const int nrOfDice, const int nrOfS
 	this->nrOfDice = nrOfDice;
 	this->nrOfSidesOnDie = nrOfSidesOnDie;
 	this->dice = new Dice[this->nrOfDice];
+	if (this->nrOfSidesOnDie != DEFAULTNROFSIDESONDIE)
+	{
+		this->dice = new Dice(this->nrOfSidesOnDie);
+	}
 }
 
 Yatzee::Yatzee(const Yatzee & originalYatzee)

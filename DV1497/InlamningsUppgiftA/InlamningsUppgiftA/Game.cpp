@@ -73,19 +73,22 @@ int main()
 	for (int i = 0; i < nrOfPlayers; i++)
 	{
 		cout << yatzee.protocolInfoOfCurrentPlayer() << endl; //Presentera protokollkolumnen och totalsumman för varje spelare
-		if (winnerSum < yatzee.getCurrentPlayerSum());
+		if (winnerSum < yatzee.getCurrentPlayerSum()); //Finds out what the winning score was
 		{
 			winnerSum = yatzee.getCurrentPlayerSum();
 		}
 		yatzee.nextPlayersTurn();
 	}
 
-	while (winnerSum != yatzee.getCurrentPlayerSum())
+	for (int i = 0; i < nrOfPlayers; i++) //Prints out who won
 	{
+		if (winnerSum == yatzee.getCurrentPlayerSum())
+		{
+			cout << "\n*** The winner is " << yatzee.nameOfCurrentPlayer() << " with " << to_string(winnerSum) << " Points ***";
+		}
 		yatzee.nextPlayersTurn();
 	}
-	cout << "\n*** The winner is " << yatzee.nameOfCurrentPlayer() << " with " << to_string(winnerSum) << "Points";
-
+	
 	system("pause");
 	return 0;
 }

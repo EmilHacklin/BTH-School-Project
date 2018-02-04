@@ -6,13 +6,12 @@
 using namespace std;
 
 const int DEFAULTCAPACITYFORPLAYERS = 3;
-const int DEFAULTNUMBEROFDICE = 5;
-const int DEFAULTNUMBEROFSIDESONDIE = 6;
+const int DEFAULTNROFDICE = 5;
 
 class Yatzee
 {
 private:
-	ProtocolColumn * *players;
+	ProtocolColumn* *players;
 	int capacityForPlayers;
 	int nrOfPlayers;
 	int indexCurrentPlayer;
@@ -23,7 +22,7 @@ private:
 	void deallocatePlayers(); //Deallocate players
 	void expandPlayers();
 public:
-	Yatzee(const int capacityForPlayers = DEFAULTCAPACITYFORPLAYERS, const int nrOfDice = DEFAULTNUMBEROFDICE, const int nrOfSidesOnDie = DEFAULTNUMBEROFSIDESONDIE);
+	Yatzee(const int capacityForPlayers = DEFAULTCAPACITYFORPLAYERS, const int nrOfDice = DEFAULTNROFDICE, const int nrOfSidesOnDie = DEFAULTNROFSIDESONDIE);
 	Yatzee(const Yatzee &originalYatzee);
 	Yatzee& operator=(const Yatzee &originalYatzee);
 	void addPlayer(const string playerName);
@@ -43,4 +42,3 @@ public:
 	bool areAllPlayersDone() const;
 	~Yatzee();
 };
-

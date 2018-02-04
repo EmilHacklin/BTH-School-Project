@@ -1,5 +1,7 @@
 #include "Dice.h"
 
+const int DEFAULTNROFSIDESONDIE = 6;
+
 Dice::Dice(int nrOfSidesOnDie)
 {
 	if (nrOfSidesOnDie > 0) //If number of sides is larger then 0 roll a die with that many sides
@@ -27,7 +29,6 @@ int Dice::getNrOfSidesOnDie() const
 {//Return number of sides on dice
 	return this->nrOfSidesOnDie;
 }
-
 
 Dice::~Dice()
 {
