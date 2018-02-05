@@ -1,6 +1,5 @@
 #pragma once
 #include <cstdlib>
-#include <ctime>
 
 extern const int DEFAULTNROFSIDESONDIE; //Default number of sides
 
@@ -14,5 +13,6 @@ public:
 	void toss();
 	int getCurrentValue() const;
 	int getNrOfSidesOnDie() const;
+	bool setNrOfSidesOnDie(const int nrOfSidesOnDie);
 	~Dice();
 };

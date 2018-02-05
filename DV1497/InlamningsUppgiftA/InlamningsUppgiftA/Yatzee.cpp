@@ -54,11 +54,18 @@ Yatzee::Yatzee(const int capacityForPlayers, const int nrOfDice, const int nrOfS
 	this->nrOfPlayers = 0;
 	this->indexCurrentPlayer = 0;
 	this->nrOfDice = nrOfDice;
-	this->nrOfSidesOnDie = nrOfSidesOnDie;
 	this->dice = new Dice[this->nrOfDice];
-	if (this->nrOfSidesOnDie != DEFAULTNROFSIDESONDIE)
+	if (nrOfSidesOnDie != DEFAULTNROFSIDESONDIE && nrOfSidesOnDie > 0)
 	{
-		this->dice = new Dice(this->nrOfSidesOnDie);
+		for (int i = 0; i < this->nrOfDice; i++)
+		{
+			this->dice[i].setNrOfSidesOnDie(nrOfSidesOnDie);
+		}
+		this->nrOfSidesOnDie = nrOfSidesOnDie;
+	}
+	else
+	{
+		this->nrOfSidesOnDie = DEFAULTNROFSIDESONDIE;
 	}
 }
 
@@ -198,6 +205,15 @@ bool Yatzee::areAllPlayersDone() const
 		{
 			return false;
 		}
+	}
+	return true;
+}
+
+bool Yatzee::isCurrentPlayerDone() const
+{
+	if (!this->players[this->indexCurrentPlayer]->isFilled()) //If players protocol is not full
+	{
+		return false;
 	}
 	return true;
 }

@@ -8,14 +8,22 @@ int main()
 {
 	srand(static_cast<unsigned int>(time(0)));
 
-	int nrOfPlayers=0;
+	int nrOfPlayers = 0, winnerSum = 0;
 
 	cout << "How many players whant to play? ";
 	cin >> nrOfPlayers; 
-	cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+	cin.clear();
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	while (nrOfPlayers <= 0 )
+	{
+		cout << "INVALID INPUT: Try again" << endl;
+		cout << "How many players whant to play? ";
+		cin >> nrOfPlayers;
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
 
 	Yatzee yatzee(nrOfPlayers); //Skapa ett Yatzee-objekt baserat på nrOfPlayers
-	
 	
 	for (int i = 0; i < nrOfPlayers; i++) //Låt användaren mata in namnen på spelarna och lägg till spelarna till Yatzee-objektet
 	{
@@ -27,53 +35,60 @@ int main()
 
 	do //Så länge som inte alla spelare har spelat klart
 	{
-		int value = 0;
-		cout << yatzee.protocolInfoOfCurrentPlayer() << endl; //Presentera protokollet för aktuell spelare
-		yatzee.toss(); //Kasta en omgång tärningar
-		for (int i = 0; i < 2; i++) //Upprepa 2 gånger
+		if (!yatzee.isCurrentPlayerDone())
 		{
-			cout << "You tossed: " << yatzee.infoOfLatestToss() << endl; //Visa tärningarnas utfall
-			cout << "Which value do you want to save or 0 to toss them all: "; //Låt användaren mata in vilket tärningsvärde som ska sparas
-			cin >> value;
-			cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
-			while (value < 0 || value > 6)
+			int value = 0;
+			cout << yatzee.protocolInfoOfCurrentPlayer() << endl; //Presentera protokollet för aktuell spelare
+			yatzee.toss(); //Kasta en omgång tärningar
+			for (int i = 0; i < 2; i++) //Upprepa 2 gånger
 			{
-				cout << "INVALID INPUT: Try again" << endl;
-				cout <<" Which value do you want to save or 0 to toss them all: ";
+				cout << "You tossed: " << yatzee.infoOfLatestToss() << endl; //Visa tärningarnas utfall
+				cout << "Which value do you want to save or 0 to toss them all: "; //Låt användaren mata in vilket tärningsvärde som ska sparas
 				cin >> value;
-				cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				while (value < 0 || value > 6)
+				{
+					cout << "INVALID INPUT: Try again" << endl;
+					cout << "Which value do you want to save or 0 to toss them all: ";
+					cin >> value;
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				}
+				yatzee.toss(value); //Kasta alla övriga tärningar
 			}
-			yatzee.toss(value); //Kasta alla övriga tärningar
-		}
-		cout << "You tossed: " << yatzee.infoOfLatestToss() << endl; //Visa tärningarnas utfall
-		cout << "Which value do you want to save: "; //Låt användaren mata in vilket tärningsvärde som ska sparas
-		cin >> value;
-		cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
-		while (!yatzee.addResult(value))
-		{
-			if (yatzee.isCurrentPlayerValueFull(value)) //Så länge som tärningsvärdet redan är ifyllt	
+			cout << "You tossed: " << yatzee.infoOfLatestToss() << endl; //Visa tärningarnas utfall
+			cout << "Which value do you want to save: "; //Låt användaren mata in vilket tärningsvärde som ska sparas
+			cin >> value;
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+			while (!yatzee.addResult(value))
 			{
-				cout << "THAT VALUE IS FULL: Try again" << endl;
+				if (yatzee.isCurrentPlayerValueFull(value)) //Så länge som tärningsvärdet redan är ifyllt	
+				{
+					cout << "THAT VALUE IS FULL: Try again" << endl;
+				}
+				else
+				{
+					cout << "INVALID INPUT: Try again" << endl;
+				}
+				cout << "Which value do you want to save: "; //Låt användaren mata in vilket tärningsvärde resultatet ska sparas på
+				cin >> value;
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
-			else
-			{
-				cout << "INVALID INPUT: Try again" << endl;
-			}
-			cout << "Which value do you want to save: "; //Låt användaren mata in vilket tärningsvärde resultatet ska sparas på
-			cin >> value; 
-			cin.ignore((std::numeric_limits<streamsize>::max)(), '\n');
+			cout << yatzee.protocolInfoOfCurrentPlayer() << endl; //Presentera protokollet för aktuell spelare
+			yatzee.nextPlayersTurn(); //Nästa spelares tur
+			system("pause");
 		}
-		cout << yatzee.protocolInfoOfCurrentPlayer() << endl; //Presentera protokollet för aktuell spelare
-		yatzee.nextPlayersTurn(); //Nästa spelares tur
-		system("pause");
 		system("cls");//Rensa skärmen och pausa
 	} while (!yatzee.areAllPlayersDone());
 
-	int winnerSum = 0;
 	for (int i = 0; i < nrOfPlayers; i++)
 	{
 		cout << yatzee.protocolInfoOfCurrentPlayer() << endl; //Presentera protokollkolumnen och totalsumman för varje spelare
-		if (winnerSum < yatzee.getCurrentPlayerSum()); //Finds out what the winning score was
+		if (winnerSum < yatzee.getCurrentPlayerSum()) //Finds out what the winning score was
 		{
 			winnerSum = yatzee.getCurrentPlayerSum();
 		}
@@ -84,7 +99,7 @@ int main()
 	{
 		if (winnerSum == yatzee.getCurrentPlayerSum())
 		{
-			cout << "\n*** The winner is " << yatzee.nameOfCurrentPlayer() << " with " << to_string(winnerSum) << " Points ***";
+			cout << "\n*** The winner is " << yatzee.nameOfCurrentPlayer() << " with " << to_string(winnerSum) << " Points ***\n" << endl;
 		}
 		yatzee.nextPlayersTurn();
 	}
