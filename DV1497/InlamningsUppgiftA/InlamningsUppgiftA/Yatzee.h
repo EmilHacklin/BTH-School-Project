@@ -40,5 +40,6 @@ public:
 	string nameOfCurrentPlayer() const;
 	void nextPlayersTurn();
 	bool areAllPlayersDone() const;
+	bool isCurrentPlayerDone() const;
 	~Yatzee();
 };

@@ -30,6 +30,16 @@ int Dice::getNrOfSidesOnDie() const
 	return this->nrOfSidesOnDie;
 }
 
+bool Dice::setNrOfSidesOnDie(const int nrOfSidesOnDie)
+{
+	if (nrOfSidesOnDie > 0)
+	{
+		this->nrOfSidesOnDie = nrOfSidesOnDie;
+		return true;
+	}
+	return false;
+}
+
 Dice::~Dice()
 {
 }
