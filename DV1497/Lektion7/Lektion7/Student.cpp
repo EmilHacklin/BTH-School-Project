@@ -25,4 +25,5 @@ string Student::toString() const
 
 Student::~Student()
 {
+	cout << "Destroying a student" << endl;
 }

@@ -10,5 +10,5 @@ public:
 	Employee(string name = "?", string email = "?", int salary = 0);
 	int getSalary() const;
 	virtual string toString() const;
-	~Employee();
+	virtual ~Employee();
 };

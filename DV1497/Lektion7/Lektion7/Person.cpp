@@ -19,4 +19,5 @@ string Person::toString() const
 
 Person::~Person()
 {
+	cout << "Destroying a person" << endl;
 }

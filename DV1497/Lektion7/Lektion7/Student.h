@@ -12,5 +12,5 @@ public:
 	int getRegNr() const;
 	string getEducationPgm() const;
 	virtual string toString() const;
-	~Student();
+	virtual ~Student();
 };

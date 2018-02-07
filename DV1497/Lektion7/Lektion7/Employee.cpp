@@ -17,4 +17,5 @@ string Employee::toString() const
 
 Employee::~Employee()
 {
+	cout << "Destroying a employee" << endl;
 }
