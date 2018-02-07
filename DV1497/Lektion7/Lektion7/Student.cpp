@@ -17,9 +17,9 @@ string Student::getEducationPgm() const
 	return this->educationPgm;
 }
 
-string Student::toString() const
+string Student::toStringSpec() const
 {
-	return Person::toString() + "\nReg nr: " + to_string(this->regNr)
+	return "\nReg nr: " + to_string(this->regNr)
 		+ "\nEducation program: " + this->educationPgm;
 }
 

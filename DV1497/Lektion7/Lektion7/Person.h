@@ -12,6 +12,7 @@ private:
 public:
 	Person(string name = "?", string email = "?");
 	string getName() const;
-	virtual string toString() const;
+	string toString() const;
+	virtual string toStringSpec() const = 0;
 	virtual ~Person();
 };

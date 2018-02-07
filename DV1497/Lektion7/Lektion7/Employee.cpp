@@ -10,9 +10,9 @@ int Employee::getSalary() const
 	return this->salary;
 }
 
-string Employee::toString() const
+string Employee::toStringSpec() const
 {
-	return Person::toString() + "\nSalary: " + to_string(this->salary);
+	return "\nSalary: " + to_string(this->salary);
 }
 
 Employee::~Employee()

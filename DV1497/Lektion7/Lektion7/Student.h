@@ -11,6 +11,6 @@ public:
 	Student(string name = "?", string email = "?", int regNr = 0, string educationPgm = "?");
 	int getRegNr() const;
 	string getEducationPgm() const;
-	virtual string toString() const;
+	virtual string toStringSpec() const;
 	virtual ~Student();
 };

@@ -13,7 +13,7 @@ string Person::getName() const
 
 string Person::toString() const
 {
-	return "\nName: " + this->name + "\nEmail-address: " + this->email;
+	return "\nName: " + this->name + "\nEmail-address: " + this->email + this->toStringSpec();
 }
 
 

@@ -9,6 +9,6 @@ private:
 public:
 	Employee(string name = "?", string email = "?", int salary = 0);
 	int getSalary() const;
-	virtual string toString() const;
+	virtual string toStringSpec() const;
 	virtual ~Employee();
 };
