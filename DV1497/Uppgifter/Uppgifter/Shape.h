@@ -12,6 +12,8 @@ public:
 	Shape(int x = 0, int y = 0);
 	string toString() const;
 	void move(int distanceX, int distanceY);
+	virtual double calcArea() const = 0;
+	virtual double calcCircumference() const = 0;
 	~Shape();
 };
 

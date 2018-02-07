@@ -12,8 +12,8 @@ public:
 	void setWidht(double width);
 	double getHeight() const;
 	double getWhidth() const;
-	double calcArea() const;
-	double calcCircumference() const;
+	virtual double calcArea() const;
+	virtual double calcCircumference() const;
 	string toString() const;
 	~Rectangle();
 };

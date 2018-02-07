@@ -6,12 +6,13 @@ using namespace std;
 
 int main()
 {
-	Shape s;
+	//Cant create a object of a abstract class
+	/*Shape s;
 	cout << "s is a shape object that has:\n" << s.toString() << endl;
 
 	s.move(100, 200);
 	cout << "s is a shape object that has:\n" << s.toString() << endl;
-	cin.get();
+	cin.get();*/
 	
 	Circle c;
 	cout << "c is a circle object that has:\n" << c.toString()
@@ -50,9 +51,10 @@ int main()
 		<< "\nCircumference: " << r.calcCircumference() << endl;
 	cin.get();
 
-	Shape s2(10, 20);
+	//Cant create a object of a abstract class
+	/*Shape s2(10, 20);
 	cout << "s2 is a shape object that has:\n" << s.toString() << endl;
-	cin.get();
+	cin.get();*/
 
 	Circle c2(10, 20, 5.3);
 	cout << "c is a circle object that has:\n" << c.toString()
