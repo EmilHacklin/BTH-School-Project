@@ -115,6 +115,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Employee.h" />
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="Student.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="MoreDynamicBindingTesting.cpp" />
+    <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Student.cpp" />
+    <ClCompile Include="Testing.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
