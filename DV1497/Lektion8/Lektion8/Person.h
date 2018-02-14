@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<fstream>
 #include<string>
 
 using namespace std;
@@ -16,5 +17,6 @@ public:
 	string getName() const;
 	string toString() const;
 	virtual string toStringSpec() const = 0;
+	virtual Person* clone() const = 0;
 	virtual ~Person();
 };

@@ -34,6 +34,11 @@ string Employee::toStringSpec() const
 	return "\nSalary: " + to_string(this->salary);
 }
 
+Employee* Employee::clone() const
+{
+	return new Employee(*this);
+}
+
 Employee::~Employee()
 {
 	cout << "Destroying a employee" << endl;

@@ -14,5 +14,6 @@ public:
 	int getRegNr() const;
 	string getEducationPgm() const;
 	virtual string toStringSpec() const;
+	virtual Student* clone() const;
 	virtual ~Student();
 };

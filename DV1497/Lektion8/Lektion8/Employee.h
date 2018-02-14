@@ -12,5 +12,6 @@ public:
 	Employee& operator=(const Employee& originalEmployee);
 	int getSalary() const;
 	virtual string toStringSpec() const;
+	virtual Employee* clone() const;
 	virtual ~Employee();
 };

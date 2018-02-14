@@ -44,6 +44,11 @@ string Student::toStringSpec() const
 		+ "\nEducation program: " + this->educationPgm;
 }
 
+Student* Student::clone() const
+{
+	return new Student(*this);
+}
+
 Student::~Student()
 {
 	cout << "Destroying a student" << endl;

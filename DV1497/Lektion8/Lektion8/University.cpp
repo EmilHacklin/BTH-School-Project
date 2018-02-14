@@ -1,7 +1,5 @@
 #include "University.h"
 
-
-
 void University::expandPersons()
 {
 	Person* *temp = new Person*[this->capacity + INCREMENT];
@@ -32,7 +30,8 @@ University::University(const University & originalUniversity)
 		this->nrOfStudents = originalUniversity.nrOfEmployees;
 		for (int i = 0; i < this->getNrOfPersons(); i++)
 		{
-			Student *stuPtr = dynamic_cast<Student*>(originalUniversity.persons[i]);
+			this->persons[i] = originalUniversity.persons[i]->clone();
+			/*Student *stuPtr = dynamic_cast<Student*>(originalUniversity.persons[i]);
 			if (stuPtr != nullptr)
 			{
 				this->persons[i] = new Student(*stuPtr);
@@ -40,7 +39,7 @@ University::University(const University & originalUniversity)
 			else
 			{
 				this->persons[i] = new Employee(*dynamic_cast<Employee*>(originalUniversity.persons[i]));
-			}
+			}*/
 		}
 	}
 }
@@ -56,7 +55,8 @@ University & University::operator=(const University & originalUniversity)
 		this->nrOfStudents = originalUniversity.nrOfEmployees;
 		for (int i = 0; i < this->getNrOfPersons(); i++)
 		{
-			Student *stuPtr = dynamic_cast<Student*>(originalUniversity.persons[i]);
+			this->persons[i] = originalUniversity.persons[i]->clone();
+			/*Student *stuPtr = dynamic_cast<Student*>(originalUniversity.persons[i]);
 			if (stuPtr != nullptr)
 			{
 				this->persons[i] = new Student(*stuPtr);
@@ -64,7 +64,7 @@ University & University::operator=(const University & originalUniversity)
 			else
 			{
 				this->persons[i] = new Employee(*dynamic_cast<Employee*>(originalUniversity.persons[i]));
-			}
+			}*/
 		}
 	}
 	return *this;
@@ -107,7 +107,13 @@ int University::getNrOfPersons() const
 
 string University::getAsStrings(const string * arr, const string what) const
 {
-	return string();
+	string returnString = "";
+	for (int i = 0; i < this->getNrOfPersons(); i++)
+	{
+		returnString += this->persons[i]->toStringSpec();
+		returnString += "\n";
+	}
+	return returnString;
 }
 
 int University::totalSalary() const
@@ -156,7 +162,26 @@ bool University::remove(const string name)
 
 bool University::readFromFile(const string filePath) const
 {
-	return false;
+	ifstream file;
+	file.open(filePath);
+	if (file.is_open())
+	{
+		//this->~University();
+		//string convertString = "";
+		//file >> convertString;
+		//file.ignore();
+		//this->capacity = stoi(convertString);
+		while (!file.eof())
+		{
+
+		}
+		file.close();
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool University::whriteToFile(const string filePath) const

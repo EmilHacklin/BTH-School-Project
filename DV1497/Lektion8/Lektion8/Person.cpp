@@ -35,7 +35,6 @@ string Person::toString() const
 	return "\nName: " + this->name + "\nEmail-address: " + this->email + this->toStringSpec();
 }
 
-
 Person::~Person()
 {
 	cout << "Destroying a person" << endl;
