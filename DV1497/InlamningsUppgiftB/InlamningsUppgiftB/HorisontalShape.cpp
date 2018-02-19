@@ -14,9 +14,8 @@ HorisontalShape::HorisontalShape(const HorisontalShape & otherShape):
 
 HorisontalShape & HorisontalShape::operator=(const HorisontalShape & otherShape)
 {
+	Shape::operator=(otherShape);
 	this->xDirection = otherShape.xDirection;
-	this->coord = otherShape.coord;
-	this->box = otherShape.box;
 	return *this;
 }
 

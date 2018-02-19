@@ -14,9 +14,8 @@ VerticalShape::VerticalShape(const VerticalShape & otherShape):
 
 VerticalShape & VerticalShape::operator=(const VerticalShape & otherShape)
 {
+	Shape::operator=(otherShape);
 	this->yDirection = otherShape.yDirection;
-	this->coord = otherShape.coord;
-	this->box = otherShape.box;
 	return *this;
 }
 
