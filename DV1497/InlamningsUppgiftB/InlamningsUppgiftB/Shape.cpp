@@ -11,13 +11,18 @@ Shape::Shape(const int posX, const int posY, const int width, const int height, 
 }
 
 Shape::
-Shape(const Shape & otherShape)
+Shape(const Shape & otherShape):
+	coord(otherShape.coord), box(otherShape.box)
 {
+	this->step = otherShape.step;
 }
 
 Shape & Shape::operator=(const Shape & otherShape)
 {
-	// TODO: insert return statement here
+	this->step = otherShape.step;
+	this->coord = otherShape.coord;
+	this->box = otherShape.box;
+	return *this;
 }
 
 void Shape::changeCoord(const int xChange, const int yChange)

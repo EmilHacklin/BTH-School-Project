@@ -6,13 +6,18 @@ HorisontalShape::HorisontalShape(const int xPos, const int yPos, const int width
 	this->xDirection = 1;
 }
 
-HorisontalShape::HorisontalShape(const HorisontalShape & otherShape)
+HorisontalShape::HorisontalShape(const HorisontalShape & otherShape):
+	Shape(otherShape)
 {
+	this->xDirection = otherShape.xDirection;
 }
 
 HorisontalShape & HorisontalShape::operator=(const HorisontalShape & otherShape)
 {
-	// TODO: insert return statement here
+	this->xDirection = otherShape.xDirection;
+	this->coord = otherShape.coord;
+	this->box = otherShape.box;
+	return *this;
 }
 
 void HorisontalShape::changeDirection()

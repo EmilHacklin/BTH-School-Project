@@ -6,6 +6,19 @@ Coord::Coord(const int xPos, const int yPos)
 	this->yPos = yPos;
 }
 
+Coord::Coord(const Coord & otherCoord)
+{
+	this->xPos = otherCoord.xPos;
+	this->yPos = otherCoord.yPos;
+}
+
+Coord & Coord::operator=(const Coord & otherCoord)
+{
+	this->xPos = otherCoord.xPos;
+	this->yPos = otherCoord.yPos;
+	return *this;
+}
+
 int Coord::getXPos() const
 {
 	return this->xPos;

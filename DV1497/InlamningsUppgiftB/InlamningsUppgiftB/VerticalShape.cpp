@@ -6,13 +6,18 @@ VerticalShape::VerticalShape(const int xPos, const int yPos, const int width, co
 	this->yDirection = 1;
 }
 
-VerticalShape::VerticalShape(const VerticalShape & otherShape)
+VerticalShape::VerticalShape(const VerticalShape & otherShape):
+	Shape(otherShape)
 {
+	this->yDirection = otherShape.yDirection;
 }
 
 VerticalShape & VerticalShape::operator=(const VerticalShape & otherShape)
 {
-	// TODO: insert return statement here
+	this->yDirection = otherShape.yDirection;
+	this->coord = otherShape.coord;
+	this->box = otherShape.box;
+	return *this;
 }
 
 void VerticalShape::changeDirection()

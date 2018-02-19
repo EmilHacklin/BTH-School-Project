@@ -92,7 +92,10 @@ int main()
 
 	//Tillse att shapesCopy pekar ut identiska objekt med de objekt som shapes pekar ut
 	//Djupkopieraing ska användas!
-
+	for (int i = 0; i < nrOfShapes; i++)
+	{
+		*shapesCopy[i] = *shapes[i];
+	}
 
 	//Presentera samtliga Shapes-objekt som shapesCopy pekar ut
 	for (int i = 0; i < nrOfShapes; i++)
@@ -105,13 +108,13 @@ int main()
 	{
 		delete shapes[i];
 	}
-	delete[] shapes;
+	delete shapes;
 
 	for (int i = 0; i < nrOfShapes; i++)
 	{
 		delete shapesCopy[i];
 	}
-	delete[] shapesCopy;
+	delete shapesCopy;
 
 	system("pause");
 	return 0;

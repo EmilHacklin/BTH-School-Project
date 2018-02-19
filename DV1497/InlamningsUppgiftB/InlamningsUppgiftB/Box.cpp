@@ -6,6 +6,19 @@ Box::Box(const int width, const int height)
 	this->height = height;
 }
 
+Box::Box(const Box & otherBox)
+{
+	this->width = otherBox.width;
+	this->height = otherBox.height;
+}
+
+Box & Box::operator=(const Box & otherBox)
+{
+	this->width = otherBox.width;
+	this->height = otherBox.height;
+	return *this;
+}
+
 int Box::getWidth() const
 {
 	return this->width;
