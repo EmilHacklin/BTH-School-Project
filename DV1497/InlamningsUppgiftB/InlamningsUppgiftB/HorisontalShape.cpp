@@ -14,8 +14,11 @@ HorisontalShape::HorisontalShape(const HorisontalShape & otherShape):
 
 HorisontalShape & HorisontalShape::operator=(const HorisontalShape & otherShape)
 {
-	Shape::operator=(otherShape);
-	this->xDirection = otherShape.xDirection;
+	if (this != &otherShape)
+	{
+		Shape::operator=(otherShape);
+		this->xDirection = otherShape.xDirection;
+	}
 	return *this;
 }
 
@@ -58,6 +61,11 @@ void HorisontalShape::move()
 	{
 		this->changeCoord(-this->getStep(),0);
 	}
+}
+
+HorisontalShape & HorisontalShape::clone(HorisontalShape &otherShape) const
+{
+	return new HorisontalShape(otherShape);
 }
 
 HorisontalShape::~HorisontalShape()

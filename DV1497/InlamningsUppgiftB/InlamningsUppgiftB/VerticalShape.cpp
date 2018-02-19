@@ -14,8 +14,11 @@ VerticalShape::VerticalShape(const VerticalShape & otherShape):
 
 VerticalShape & VerticalShape::operator=(const VerticalShape & otherShape)
 {
-	Shape::operator=(otherShape);
-	this->yDirection = otherShape.yDirection;
+	if (this != &otherShape)
+	{
+		Shape::operator=(otherShape);
+		this->yDirection = otherShape.yDirection;
+	}
 	return *this;
 }
 
@@ -58,6 +61,11 @@ void VerticalShape::move()
 	{
 		this->changeCoord(0, -this->getStep());
 	}
+}
+
+VerticalShape & VerticalShape::clone(VerticalShape &otherShape) const
+{
+	return new VerticalShape(otherShape);
 }
 
 VerticalShape::~VerticalShape()

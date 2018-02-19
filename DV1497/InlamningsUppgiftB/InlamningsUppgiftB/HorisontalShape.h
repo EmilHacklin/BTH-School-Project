@@ -1,5 +1,6 @@
 #pragma once
 #include "Shape.h"
+
 class HorisontalShape :
 	public Shape
 {
@@ -13,6 +14,7 @@ public:
 	virtual string getDirectionAsString() const;
 	virtual string startString() const;
 	virtual void move();
+	virtual HorisontalShape& clone(HorisontalShape &otherShape) const;
 	~HorisontalShape();
 };
 

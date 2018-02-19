@@ -19,9 +19,12 @@ Shape(const Shape & otherShape):
 
 Shape & Shape::operator=(const Shape & otherShape)
 {
-	this->step = otherShape.step;
-	this->coord = otherShape.coord;
-	this->box = otherShape.box;
+	if (this != &otherShape)
+	{
+		this->step = otherShape.step;
+		this->coord = otherShape.coord;
+		this->box = otherShape.box;
+	}
 	return *this;
 }
 
