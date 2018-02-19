@@ -63,9 +63,9 @@ void VerticalShape::move()
 	}
 }
 
-VerticalShape & VerticalShape::clone(VerticalShape &otherShape) const
+VerticalShape* VerticalShape::clone() const
 {
-	return new VerticalShape(otherShape);
+	return new VerticalShape(*this);
 }
 
 VerticalShape::~VerticalShape()

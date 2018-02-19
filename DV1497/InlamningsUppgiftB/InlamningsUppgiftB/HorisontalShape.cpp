@@ -63,9 +63,9 @@ void HorisontalShape::move()
 	}
 }
 
-HorisontalShape & HorisontalShape::clone(HorisontalShape &otherShape) const
+HorisontalShape* HorisontalShape::clone() const
 {
-	return new HorisontalShape(otherShape);
+	return new HorisontalShape(*this);
 }
 
 HorisontalShape::~HorisontalShape()

@@ -94,7 +94,7 @@ int main()
 	//Djupkopieraing ska användas!
 	for (int i = 0; i < nrOfShapes; i++)
 	{
-		*shapesCopy[i] = *shapes[i];
+		shapesCopy[i] = shapes[i]->clone();
 	}
 
 	//Presentera samtliga Shapes-objekt som shapesCopy pekar ut

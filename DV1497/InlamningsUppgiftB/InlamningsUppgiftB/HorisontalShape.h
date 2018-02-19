@@ -14,7 +14,7 @@ public:
 	virtual string getDirectionAsString() const;
 	virtual string startString() const;
 	virtual void move();
-	virtual HorisontalShape& clone(HorisontalShape &otherShape) const;
+	virtual HorisontalShape* clone() const;
 	~HorisontalShape();
 };
 
