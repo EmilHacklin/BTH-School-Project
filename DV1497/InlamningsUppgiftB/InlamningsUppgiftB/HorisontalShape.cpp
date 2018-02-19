@@ -6,6 +6,15 @@ HorisontalShape::HorisontalShape(const int xPos, const int yPos, const int width
 	this->xDirection = 1;
 }
 
+HorisontalShape::HorisontalShape(const HorisontalShape & otherShape)
+{
+}
+
+HorisontalShape & HorisontalShape::operator=(const HorisontalShape & otherShape)
+{
+	// TODO: insert return statement here
+}
+
 void HorisontalShape::changeDirection()
 {
 	if (this->xDirection == 1)
@@ -32,7 +41,7 @@ string HorisontalShape::getDirectionAsString() const
 
 string HorisontalShape::startString() const
 {
-	return "Horisontal :\n";
+	return "\nHorisontal :\n";
 }
 
 void HorisontalShape::move()

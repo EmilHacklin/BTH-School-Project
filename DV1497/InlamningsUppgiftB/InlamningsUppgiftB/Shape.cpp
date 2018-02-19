@@ -1,13 +1,23 @@
 #include "Shape.h"
 
-const string Shape::UP = "UP";
-const string Shape::DOWN = "DOWN";
-const string Shape::LEFT = "LEFT";
-const string Shape::RIGHT = "RIGHT";
+const string Shape::UP = "UP\n";
+const string Shape::DOWN = "DOWN\n";
+const string Shape::LEFT = "LEFT\n";
+const string Shape::RIGHT = "RIGHT\n";
 
 Shape::Shape(const int posX, const int posY, const int width, const int height, const int step):coord(posX, posY), box(width, height)
 {
 	this->step = step;
+}
+
+Shape::
+Shape(const Shape & otherShape)
+{
+}
+
+Shape & Shape::operator=(const Shape & otherShape)
+{
+	// TODO: insert return statement here
 }
 
 void Shape::changeCoord(const int xChange, const int yChange)
@@ -50,7 +60,7 @@ string Shape::toString() const
 	returnString += to_string(this->coord.getYPos());
 	returnString += "\nDirection : ";
 	returnString += this->getDirectionAsString();
-	returnString += "\nStep : ";
+	returnString += "Step : ";
 	returnString += to_string(this->step);
 	returnString += "\nWidth : ";
 	returnString += to_string(this->box.getWidth());

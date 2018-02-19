@@ -6,6 +6,8 @@
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	locale swedish("swedish");
+	locale::global(swedish);
 	int capacity = 5;
 	int nrOfShapes = 0;
 	Shape* * shapes = nullptr;
@@ -19,7 +21,7 @@ int main()
 	shapes[0] = new HorisontalShape(10, 10, 50, 50, 5);
 	nrOfShapes++;
 	//VerticalShape-objekt med xPos:30, yPos:30, bredd:40, höjd:40, steglängd:10
-	shapes[1] = new VerticalShape(30, 10, 40, 40, 10);
+	shapes[1] = new VerticalShape(30, 30, 40, 40, 10);
 	nrOfShapes++;
 	//HorisontalShape-objekt med xPos:50, yPos:50, bredd:30, höjd:30, steglängd:8
 	shapes[2] = new HorisontalShape(50, 50, 30, 30, 8);
@@ -54,42 +56,62 @@ int main()
 	//Kontrollera om objektet som pekas ut av shapes[0] överlappar objektet som pekas ut av shapes[3]
 	if (shapes[0]->intersectsWith(*shapes[3]))
 	{//Presentera resultatet
-		cout << "True" << endl;
+		cout << "\nÖverlappar varandra\n" << endl;
 	}
 	else
 	{
-		cout << "False" << endl;
+		cout << "\nÖverlappar INTE varandra\n" << endl;
 	}
 	
 
 	//Kontrollera om objektet som pekas ut av shapes[0] överlappar objektet som pekas ut av shapes[1] 
 	if (shapes[0]->intersectsWith(*shapes[1]))
 	{//Presentera resultatet
-		cout << "True" << endl;
+		cout << "Överlappar varandra\n" << endl;
 	}
 	else
 	{
-		cout << "False" << endl;
+		cout << "Överlappar INTE varandra\n" << endl;
 	}
 	
 	//Presentera endast riktningen för HorisontalShape-objekten
 	//Du ska utgå från att du inte på förhand vet från vilka positioner de pekas ut från pekarna i arrayen shapes
 	for (int i = 0; i < nrOfShapes; i++)
 	{
-		cout << dynamic_cast<HorisontalShape>(shapes[i]->getDirectionAsString());
+		HorisontalShape *horisontalPtr = dynamic_cast<HorisontalShape*>(shapes[i]);
+		if (horisontalPtr != nullptr)
+		{
+			cout << horisontalPtr->getDirectionAsString() << endl;
+		}
 	}
-	
-	
+
 	Shape* *shapesCopy = nullptr;
 
 	//Skapa för shapesCopy en dynamiskt allokerad array innehållande capacity pekare av typen Shape
+	shapesCopy = new Shape*[capacity];
 
 	//Tillse att shapesCopy pekar ut identiska objekt med de objekt som shapes pekar ut
 	//Djupkopieraing ska användas!
 
+
 	//Presentera samtliga Shapes-objekt som shapesCopy pekar ut
+	for (int i = 0; i < nrOfShapes; i++)
+	{
+		cout << shapesCopy[i]->toString() << endl;
+	}
 	
 	//Tillse att inga minnesläckor finns
+	for (int i = 0; i < nrOfShapes; i++)
+	{
+		delete shapes[i];
+	}
+	delete[] shapes;
+
+	for (int i = 0; i < nrOfShapes; i++)
+	{
+		delete shapesCopy[i];
+	}
+	delete[] shapesCopy;
 
 	system("pause");
 	return 0;

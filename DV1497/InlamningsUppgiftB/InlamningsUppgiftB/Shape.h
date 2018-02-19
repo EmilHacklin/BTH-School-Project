@@ -16,6 +16,8 @@ public:
 	static const string LEFT;
 	static const string RIGHT;
 	Shape(const int xPos = 0, const int yPos = 0, const int width = 0, const int height = 0, const int step = 0);
+	Shape(const Shape &otherShape);
+	Shape& operator=(const Shape &otherShape);
 	void changeCoord(const int xChange, const int yChange);
 	int getStep() const;
 	void changeStep(const int change);

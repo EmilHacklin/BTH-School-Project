@@ -6,6 +6,15 @@ VerticalShape::VerticalShape(const int xPos, const int yPos, const int width, co
 	this->yDirection = 1;
 }
 
+VerticalShape::VerticalShape(const VerticalShape & otherShape)
+{
+}
+
+VerticalShape & VerticalShape::operator=(const VerticalShape & otherShape)
+{
+	// TODO: insert return statement here
+}
+
 void VerticalShape::changeDirection()
 {
 	if (this->yDirection == 1)
@@ -32,7 +41,7 @@ string VerticalShape::getDirectionAsString() const
 
 string VerticalShape::startString() const
 {
-	return "Vertical :\n";
+	return "\nVertical :\n";
 }
 
 void VerticalShape::move()
