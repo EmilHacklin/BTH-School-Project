@@ -6,12 +6,14 @@ class Vector
 private:
 	T * items;
 	int capacity;
+	int increment;
 	int nrOfItems;
+	void increaseItems(const int increaseBySize);
 public:
 	Vector(const int capacity = 10, const int increment = 10);
 	Vector(const Vector &otherVector);
-	Vector& operator=(const Vector &otherVector);
-	Vector& operator+(const Vector &otherVector);
+	Vector<T>& operator=(const Vector<T> &otherVector);
+	Vector<T>& operator+(const Vector<T> &otherVector);
 	T operator[](int index);
 	void addLast(T item);
 	void addFirst(T item);
