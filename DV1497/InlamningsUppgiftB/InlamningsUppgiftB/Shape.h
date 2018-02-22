@@ -8,13 +8,13 @@ class Shape
 {
 private:
 	int step;
+	Coord coord;
+	Box box;
 public:
 	static const string UP;
 	static const string DOWN;
 	static const string LEFT;
 	static const string RIGHT;
-	Coord coord;
-	Box box;
 	Shape(const int xPos = 0, const int yPos = 0, const int width = 0, const int height = 0, const int step = 0);
 	Shape(const Shape &otherShape);
 	Shape& operator=(const Shape &otherShape);
