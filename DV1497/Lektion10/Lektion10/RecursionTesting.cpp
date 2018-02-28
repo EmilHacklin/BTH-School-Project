@@ -26,6 +26,31 @@ unsigned int sum(unsigned int n)
 	}
 }
 
+template<typename T>
+int partition(T arr[], int startPos, int endPos)
+{
+	int partisionIndex = startPos;
+	for (int i = startPos; i < endPos; i++)
+	{
+		if (arr[i] < arr[i + 1])
+		{
+			swap(arr[i], arr[i + 1]);
+			partisionIndex++;
+		}
+	}
+}
+
+template<typename T>
+void quicksort(T arr[], int startPos, int endPos)
+{
+	if (startPos < endPos)
+	{
+		int pivotIndex = partition(arr, startPos, endPos);
+		quicksort(arr[], startPos, pivotIndex - 1);
+		quicksort(arr[], pivotIndex + 1, endPos);
+	}
+}
+
 int main()
 {
 	unsigned int result = factorial(0);
