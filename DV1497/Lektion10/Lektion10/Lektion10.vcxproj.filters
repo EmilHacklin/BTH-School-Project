@@ -26,5 +26,8 @@
     <ClCompile Include="TestStack.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="RecursionTesting.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

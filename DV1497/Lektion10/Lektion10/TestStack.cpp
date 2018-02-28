@@ -67,7 +67,22 @@ int main()
 	cout << "Expected printout: 300" << endl;
 	cout << "Printout at runtime: ";
 	cout << testCopy.peek() << endl;
-	
+
+	cin.get();
+
+	stack.push(400);
+	stack.push(500);
+	stack.push(600);
+	stack.push(700);
+	stack.push(800);
+	stack.push(900);
+	stack.push(1000);
+	stack.push(1100);
+	stack.push(1200);
+	cout << "Expected printout: 1200" << endl;
+	cout << "Printout at runtime: ";
+	cout << stack.peek() << endl;
+
 	cin.get();
 	return 0;
 }
