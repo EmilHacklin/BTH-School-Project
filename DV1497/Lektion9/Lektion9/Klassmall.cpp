@@ -1,4 +1,4 @@
-#include<vector>
+#include"Vector.h"
 #include<string>
 #include<iostream>
 
@@ -6,13 +6,17 @@ using namespace std;
 
 int main()
 {
-	vector<int> nrs;
-	vector<string> names;
+	Vector<int> nrs;
+	//Vector<string> names;
 
-	nrs.push_back(10);
-	cout << nrs.at(0) << endl;
-	for (int i = 11; i < 100; i++)
+	try
 	{
-		nrs.push_back(i);
+		cout << nrs.getLast() << endl;
 	}
+	catch (char* exep)
+	{
+		cout << exep << endl;
+	}
+
+	cin.get();
 }
