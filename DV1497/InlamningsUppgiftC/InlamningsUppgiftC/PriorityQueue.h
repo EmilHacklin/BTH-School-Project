@@ -9,8 +9,9 @@ private:
 	int capacity;
 	int increment;
 	int nrOfItems;
-	void partision(const T items[], const int start, const int end);
-	void quickSort(const T items[], const int start, const int end);
+	void swap(const int pos1, const int pos2);
+	int partition(const int startPos, const int endPos);
+	void quickSort(const int startPos, const int endPos);
 public:
 	PriorityQueue(const int increment = 10);
 	PriorityQueue(const PriorityQueue &originalPriorityQueue);
@@ -23,13 +24,37 @@ public:
 };
 
 template<typename T>
-inline void PriorityQueue<T>::partision(const T items[], const int start, const int end)
+inline void PriorityQueue<T>::swap(const int pos1, const int pos2)
 {
+	T temp = this->items[pos1];
+	this->items[pos1] = this->items[pos2];
+	this->items[pos2] = temp;
 }
 
 template<typename T>
-inline void PriorityQueue<T>::quickSort(const T items[], const int start, const int end)
+inline int PriorityQueue<T>::partition(const int startPos, const int endPos)
 {
+	int partisionIndex = startPos;
+	for (int i = startPos; i < endPos; i++)
+	{
+		if (this->items[i] > this->items[i + 1])
+		{
+			swap(i, i + 1);
+			partisionIndex++;
+		}
+	}
+	return partisionIndex;
+}
+
+template<typename T>
+inline void PriorityQueue<T>::quickSort(const int startPos, const int endPos)
+{
+	if (startPos < endPos)
+	{
+		int pivotIndex = partition(startPos, endPos);
+		this->quickSort(startPos, pivotIndex - 1);
+		this->quickSort(pivotIndex + 1, endPos);
+	}
 }
 
 template<typename T>
@@ -95,18 +120,34 @@ inline void PriorityQueue<T>::enqueue(const T & element)
 	}
 	this->items[this->nrOfItems] = element;
 	this->nrOfItems++;
+	this->quickSort(0, this->nrOfItems);
 }
 
 template<typename T>
 inline T PriorityQueue<T>::dequeue() throw(...)
 {
-	return T();
+	if (this->nrOfItems > 0)
+	{
+		this->nrOfItems--;
+		return T(this->items[this->nrOfItems]);
+	}
+	else
+	{
+		throw "Exception: queue is empty";
+	}
 }
 
 template<typename T>
 inline T PriorityQueue<T>::front() const throw(...)
 {
-	return T();
+	if (this->nrOfItems > 0)
+	{
+		return this->items[this->nrOfItems - 1];
+	}
+	else
+	{
+		throw "Exception: queue is empty";
+	}
 }
 
 template<typename T>
