@@ -9,6 +9,8 @@ private:
 	int capacity;
 	int increment;
 	int nrOfItems;
+	void partision(const T items[], const int start, const int end);
+	void quickSort(const T items[], const int start, const int end);
 public:
 	PriorityQueue(const int increment = 10);
 	PriorityQueue(const PriorityQueue &originalPriorityQueue);
@@ -16,9 +18,19 @@ public:
 	virtual void enqueue(const T& element);
 	virtual T dequeue() throw(...);
 	virtual T front() const throw(...);
-	virtual bool isEmpty();
+	virtual bool isEmpty() const;
 	~PriorityQueue();
 };
+
+template<typename T>
+inline void PriorityQueue<T>::partision(const T items[], const int start, const int end)
+{
+}
+
+template<typename T>
+inline void PriorityQueue<T>::quickSort(const T items[], const int start, const int end)
+{
+}
 
 template<typename T>
 inline PriorityQueue<T>::PriorityQueue(const int increment)
@@ -70,7 +82,19 @@ inline PriorityQueue<T>& PriorityQueue<T>::operator=(const PriorityQueue<T> &ori
 template<typename T>
 inline void PriorityQueue<T>::enqueue(const T & element)
 {
-
+	if (this->capacity == this->nrOfItems)
+	{
+		T *temp = new T[this->capacity + this->increment];
+		for (int i = 0; i < this->nrOfItems; i++)
+		{
+			temp[i] = T(this->items[i]);
+		}
+		delete[] this->items;
+		this->items = temp;
+		this->capacity += this->increment;
+	}
+	this->items[this->nrOfItems] = element;
+	this->nrOfItems++;
 }
 
 template<typename T>
@@ -86,7 +110,7 @@ inline T PriorityQueue<T>::front() const throw(...)
 }
 
 template<typename T>
-inline bool PriorityQueue<T>::isEmpty()
+inline bool PriorityQueue<T>::isEmpty() const
 {
 	if (this->nrOfItems > 0)
 	{
