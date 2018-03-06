@@ -1,11 +1,12 @@
 #pragma once
+#include<type_traits>
 #include"IPriorityQueue.h"
 
 template <typename T>
 class PriorityQueue : public IPriorityQueue<T>
 {
 private:
-	T *items;
+	T* *items;
 	int capacity;
 	int increment;
 	int nrOfItems;
@@ -26,7 +27,7 @@ public:
 template<typename T>
 inline void PriorityQueue<T>::swap(const int pos1, const int pos2)
 {
-	T temp = this->items[pos1];
+	T *temp = this->items[pos1];
 	this->items[pos1] = this->items[pos2];
 	this->items[pos2] = temp;
 }
@@ -37,10 +38,18 @@ inline int PriorityQueue<T>::partition(const int startPos, const int endPos)
 	int partisionIndex = startPos;
 	for (int i = startPos; i < endPos; i++)
 	{
-		if (this->items[i] > this->items[i + 1])
+		if (std::is_pointer<T>())
 		{
-			swap(i, i + 1);
-			partisionIndex++;
+			//If typename T is a pointer do something to compare the values of the type T is a pointer of???
+			//Or make every dynamic cast in the world
+		}
+		else
+		{
+			if (*this->items[i] > *this->items[i + 1])
+			{
+				swap(i, i + 1);
+				partisionIndex++;
+			}
 		}
 	}
 	return partisionIndex;
@@ -68,7 +77,7 @@ inline PriorityQueue<T>::PriorityQueue(const int increment)
 	{
 		this->increment = increment;
 	}
-	this->items = new T[this->increment];
+	this->items = new T*[this->increment];
 	this->capacity = this->increment;
 	this->nrOfItems = 0;
 }
@@ -76,13 +85,13 @@ inline PriorityQueue<T>::PriorityQueue(const int increment)
 template<typename T>
 inline PriorityQueue<T>::PriorityQueue(const PriorityQueue & originalPriorityQueue)
 {
-	this->increment = originalPriorityQueue.capacity;
+	this->increment = originalPriorityQueue.increment;
 	this->capacity = originalPriorityQueue.capacity;
-	this->items = new T[this->capacity];
+	this->items = new T*[this->capacity];
 	this->nrOfItems = originalPriorityQueue.nrOfItems;
 	for (int i = 0; i < this->nrOfItems; i++)
 	{
-		this->items[i] = T(originalPriorityQueue.items[i]);
+		this->items[i] = new T(*originalPriorityQueue.items[i]);
 	}
 }
 
@@ -91,62 +100,83 @@ inline PriorityQueue<T>& PriorityQueue<T>::operator=(const PriorityQueue<T> &ori
 {
 	if (this != &originalPriorityQueue)
 	{
-		delete[] this->items;
-		this->increment = originalPriorityQueue.capacity;
+		this->~PriorityQueue();
+		this->increment = originalPriorityQueue.increment;
 		this->capacity = originalPriorityQueue.capacity;
-		this->items = new T[this->capacity];
+		this->items = new T*[this->capacity];
 		this->nrOfItems = originalPriorityQueue.nrOfItems;
 		for (int i = 0; i < this->nrOfItems; i++)
 		{
-			this->items[i] = T(originalPriorityQueue.items[i]);
+			this->items[i] = new T(*originalPriorityQueue.items[i]);
 		}
 	}
 	return *this;
 }
 
 template<typename T>
-inline void PriorityQueue<T>::enqueue(const T & element)
+inline void PriorityQueue<T>::enqueue(const T &element)
 {
 	if (this->capacity == this->nrOfItems)
 	{
-		T *temp = new T[this->capacity + this->increment];
+		T* *temp = new T*[this->capacity + this->increment];
 		for (int i = 0; i < this->nrOfItems; i++)
 		{
-			temp[i] = T(this->items[i]);
+			temp[i] = (this->items[i]);
 		}
 		delete[] this->items;
 		this->items = temp;
 		this->capacity += this->increment;
 	}
-	this->items[this->nrOfItems] = element;
+	this->items[this->nrOfItems] = new T(element);
 	this->nrOfItems++;
-	this->quickSort(0, this->nrOfItems);
+	this->quickSort(0, this->nrOfItems - 1);
 }
 
 template<typename T>
 inline T PriorityQueue<T>::dequeue() throw(...)
 {
-	if (this->nrOfItems > 0)
+	if (this->nrOfItems == 0)
 	{
-		this->nrOfItems--;
-		return T(this->items[this->nrOfItems]);
+		char excep[]("Exception: queue is empty");
+		throw excep;
+	}
+	else if (this->nrOfItems < 0)
+	{
+		char excep[]("Exception: queue have negative number of items");
+		throw excep;
 	}
 	else
 	{
-		throw "Exception: queue is empty";
+		T returnItem = T(*this->items[this->nrOfItems - 1]);
+		if (std::is_pointer<T>())
+		{
+			delete[] this->items[this->nrOfItems - 1];
+		}
+		else
+		{
+			delete this->items[this->nrOfItems - 1];
+		}
+		this->nrOfItems--;
+		return returnItem;
 	}
 }
 
 template<typename T>
 inline T PriorityQueue<T>::front() const throw(...)
 {
-	if (this->nrOfItems > 0)
+	if (this->nrOfItems == 0)
 	{
-		return this->items[this->nrOfItems - 1];
+		char excep[]("Exception: queue is empty");
+		throw excep;
+	}
+	else if (this->nrOfItems < 0)
+	{
+		char excep[]("Exception: queue have negative number of items");
+		throw excep;
 	}
 	else
 	{
-		throw "Exception: queue is empty";
+		return *this->items[this->nrOfItems - 1];
 	}
 }
 
@@ -166,6 +196,20 @@ inline bool PriorityQueue<T>::isEmpty() const
 template<typename T>
 inline PriorityQueue<T>::~PriorityQueue()
 {
+	if (std::is_pointer<T>())
+	{
+		for (int i = 0; i < this->nrOfItems; i++)
+		{
+			delete[] this->items[i];
+		}
+	}
+	else
+	{
+		for (int i = 0; i < this->nrOfItems; i++)
+		{
+			delete this->items[i];
+		}
+	}
 	delete[] this->items;
 	this->capacity = 0;
 	this->nrOfItems = 0;
